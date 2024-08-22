@@ -5,6 +5,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NewsapiService } from './newsapi.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { ArticlesComponent } from './articles/articles.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
     CommonModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
+    ArticlesComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -26,6 +28,9 @@ export class AppComponent {
   });
 
   public searchList: Array<any> = [];
+  public filteredResults: Array<any> = [];
+  public showResults: boolean = false;
+  public hidenews: boolean = true;
 
   constructor(private service: NewsapiService) {
     this.searchForm
@@ -37,6 +42,19 @@ export class AppComponent {
       )
       .subscribe((data) => {
         this.searchList = data?.articles;
+        this.filterResults();
       });
+  }
+
+  filterResults() {
+    const searchTerm = this.searchForm.get('search')!.value.toLowerCase();
+    this.filteredResults = this.searchList.filter(article =>
+      article.title.toLowerCase().includes(searchTerm)
+    );
+  }
+  onSearch() {
+    this.filterResults();
+    this.showResults = true;
+    this.hidenews = false;
   }
 }
