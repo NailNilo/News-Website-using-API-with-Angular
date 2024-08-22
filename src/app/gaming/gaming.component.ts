@@ -3,24 +3,48 @@ import { AppComponent } from '../app.component';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NewsapiService } from '../newsapi.service';
-import { LoadingBarService } from '@ngx-loading-bar/core';
-
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-gaming',
   standalone: true,
-  imports: [AppComponent,CommonModule,RouterOutlet,RouterLink],
+  imports: [
+    AppComponent,
+    CommonModule,
+    RouterOutlet,
+    RouterLink,
+    MatPaginatorModule,
+  ],
   templateUrl: './gaming.component.html',
-  styleUrl: './gaming.component.css'
+  styleUrl: './gaming.component.css',
 })
 export class GamingComponent {
-  constructor(private service:NewsapiService ) { }
+  constructor(private service: NewsapiService) {}
 
-  gamingNewsDisplay:any=[];
-  
+  gamingNewsDisplay: any = [];
+
   ngOnInit() {
-    this.service.gamingNews().subscribe((data)=>{
-      this.gamingNewsDisplay=data.articles;
-    })    
+    this.service.gamingNews().subscribe((data) => {
+      this.gamingNewsDisplay = data.articles;
+      this.fetchNews();
+    });
+  }
+  length = 500;
+  pageSize = 50;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+  showFirstLastButtons = true;
+
+  fetchNews() {
+    this.service.gamingNews(this.pageIndex, this.pageSize).subscribe((data) => {
+      this.gamingNewsDisplay = data.articles;
+      this.length = data.totalResults;
+    });
+  }
+  handlePageEvent(event: PageEvent) {
+    this.length = event.length;
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+    this.fetchNews();
   }
 }

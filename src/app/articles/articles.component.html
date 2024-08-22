@@ -17,3 +17,10 @@
     </div>
   </div>
 </div>
+<mat-paginator
+  [length]="length"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  [showFirstLastButtons]="showFirstLastButtons"
+  (page)="handlePageEvent($event)">
+</mat-paginator>
