@@ -3,6 +3,7 @@ import { AppComponent } from '../app.component';
 import { NewsapiService } from '../newsapi.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 
 @Component({
