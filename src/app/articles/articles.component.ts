@@ -3,7 +3,6 @@ import { AppComponent } from '../app.component';
 import { NewsapiService } from '../newsapi.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { LoadingBarService } from '@ngx-loading-bar/core';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -30,7 +29,7 @@ export class ArticlesComponent {
       this.fetchNews();
     });
   }
-  
+
   length = 500;
   pageSize = 50;
   pageIndex = 0;

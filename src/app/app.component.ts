@@ -23,6 +23,7 @@ import { ArticlesComponent } from './articles/articles.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  title = 'news-app';
   searchForm: FormGroup = new FormGroup({
     search: new FormControl(''),
   });
@@ -48,7 +49,7 @@ export class AppComponent {
 
   filterResults() {
     const searchTerm = this.searchForm.get('search')!.value.toLowerCase();
-    this.filteredResults = this.searchList.filter(article =>
+    this.filteredResults = this.searchList.filter((article) =>
       article.title.toLowerCase().includes(searchTerm)
     );
   }
