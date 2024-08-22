@@ -8,6 +8,12 @@ import { Observable } from 'rxjs';
 export class NewsapiService {
   constructor(private http: HttpClient) {}
 
+
+// -----------------------------------------/////----------------------------------------
+// YOU CAN GET AN API FROM     https://newsapi.org 
+// JUST REPLACE THE PLACEHOLDER WITH YOUR ACTUAL API KEY
+// ----------------------------------------/////----------------------------------------
+
   displayNews(page: number = 0, pageSize: number = 10): Observable<any> {
     const newsApiUrl = `https://newsapi.org/v2/everything?q=headlines&page=${
       page + 1
