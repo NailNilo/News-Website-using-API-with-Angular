@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { NewsapiService } from '../newsapi.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
+
 
 @Component({
   selector: 'app-sport',

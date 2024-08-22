@@ -3,6 +3,8 @@ import { AppComponent } from '../app.component';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NewsapiService } from '../newsapi.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
+
 
 @Component({
   selector: 'app-gaming',
